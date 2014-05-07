@@ -8,6 +8,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+/**
+ * Hello Git!
+ * @author mfeindler
+ *
+ */
 public class CLIParamUtilsTest {
 	private String[] oddArgs = new String[]{"arg1", "arg2", "arg3"};
 	private String[] eventArgs = new String[]{"arg1", "arg2", "arg3", "arg4"};
