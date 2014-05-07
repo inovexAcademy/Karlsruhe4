@@ -26,7 +26,7 @@ public class FrameMakerTest {
 	public void calculateLineWidth() {
 		FrameMaker maker = getFrameMaker();
 		
-		assertThat(maker.getWidth(asList("Hallo", "sch�ne, neue", "Welt")), equalTo(12));
+		assertThat(maker.getWidth(asList("Hallo", "schöne, neue", "Welt")), equalTo(12));
 	}
 	
 	@Test
@@ -42,6 +42,21 @@ public class FrameMakerTest {
 		
 		assertThat(maker.getDisplayLine("Hallo", 12), equalTo("*Hallo       *"));
 		assertThat(maker.getDisplayLine("Welt", 12), equalTo("*Welt        *"));
+	}
+	
+	@Test
+	public void testRepeatCharacter(){
+		FrameMaker maker = getFrameMaker();
+		
+		assertThat(maker.repeatCharacter('g', 6), equalTo("gggggg"));
+		assertThat(maker.repeatCharacter('*', 3), equalTo("***"));
+	}
+	
+	@Test
+	public void testBigThing(){
+		FrameMaker maker = getFrameMaker();
+		
+		assertThat(maker.makeFrame(asList("Hallo", "schöne, neue", "Welt")), equalTo(asList(maker.repeatCharacter('*', 14), "*Hallo       *", "*schöne, neue*", "*Welt        *", maker.repeatCharacter('*', 14))));
 	}
 
 }
