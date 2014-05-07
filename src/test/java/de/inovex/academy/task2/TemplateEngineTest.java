@@ -12,9 +12,22 @@ import static java.util.Arrays.asList;
 
 public class TemplateEngineTest {
 	
+	private String defaultTemplate;
+	private Map<String, String> defaultVars;
+	
+	public TemplateEngineTest() {
+		defaultVars = new HashMap<String, String>();
+		
+		defaultVars.put("vorname", "Klaus");
+		defaultVars.put("nachname", "Meyer");
+		defaultVars.put("geschlecht", "nix");
+		
+		defaultTemplate = "Hallo ${vorname} ${nachname}";
+	}
 	public TemplateEngine getTemplateEngine(String template) {
 		return new TemplateEngine(template);
 	}
+	
 
 	@Test
 	public void renderTemplate() {
@@ -27,31 +40,17 @@ public class TemplateEngineTest {
 		vars.put("vorname", "Klaus");
 		vars.put("nachname", "Meyer");
 		
-		assertThat(getTemplateEngine("Hallo ${vorname} ${nachname}").render(vars), is("Hallo Klaus Meyer"));
+		assertThat(getTemplateEngine(defaultTemplate).render(vars), is("Hallo Klaus Meyer"));
 	}
 	
 	@Test
 	public void testContainsPlaceHolder() {
-		String template = "Hallo ${vorname} ${nachname}";
-		
-		Map<String, String> vars = new HashMap<String, String>();
-		
-		vars.put("vorname", "Klaus");
-		vars.put("nachname", "Meyer");
-		vars.put("geschlecht", "nix");
-		
-		assertThat(getTemplateEngine("Hallo ${vorname} ${nachname}").containsPlaceHolder("geschlecht"), is(false));
+		assertThat(getTemplateEngine(defaultTemplate).containsPlaceHolder("geschlecht"), is(false));
 	}
 	
 	@Test(expected = PlaceHolderException.class)
 	public void testPlaceHolderExceptionIsThrownWhenPlaceholderNotFound() {
-		Map<String, String> vars = new HashMap<String, String>();
-
-		vars.put("vorname", "Klaus");
-		vars.put("nachname", "Meyer");
-		vars.put("geschlecht", "nix");
-		
-		getTemplateEngine("Hallo ${vorname} ${nachname}").render(vars);
+		getTemplateEngine(defaultTemplate).render(defaultVars);
 	}
 	
 }
