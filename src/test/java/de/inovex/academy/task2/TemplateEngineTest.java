@@ -63,4 +63,10 @@ public class TemplateEngineTest {
 		assertThat(getTemplateEngine(defaultTemplate).parsePlaceholderFromTemplate(), equalTo(expectedSet));
 	}
 	
+	@Test
+	public void testValidation(){
+		assertThat(getTemplateEngine(defaultTemplate).validate(defaultVars), equalTo(true));
+		assertThat(getTemplateEngine("Hallo ${x}").validate(defaultVars), equalTo(false));
+	}
+	
 }

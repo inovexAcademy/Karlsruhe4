@@ -36,6 +36,12 @@ public class TemplateEngine {
 	}
 	
 	public boolean validate(Map<String, String> vars){
+		Set<String> placeholders = parsePlaceholderFromTemplate();
+		
+		for(String placeholder: placeholders)
+			if(!vars.containsKey(placeholder))
+				return false;
+		
 		return true;
 	}
 	
@@ -43,12 +49,12 @@ public class TemplateEngine {
 		
 		Set<String> resultSet = new HashSet<String>();
 		
-		Pattern pattern = Pattern.compile("\\${(.+?)}");
+		Pattern pattern = Pattern.compile("\\$\\{(.+?)\\}");
 		
 		Matcher matcher = pattern.matcher(template);
 		
 		while (matcher.find()) {
-			resultSet.add(matcher.group(0));
+			resultSet.add(matcher.group(1));
 		}
 		
 		return resultSet;
