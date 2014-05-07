@@ -1,5 +1,6 @@
 package de.inovex.academy.task2;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -18,7 +19,7 @@ public class TemplateEngine {
 		if(!validate(vars))
 			throw new UnmatchedPlaceholderException();
 		
-		for (String var : vars.8keySet()) {
+		for (String var : vars.keySet()) {
 			
 			if (!containsPlaceHolder(var)) {
 				throw new PlaceHolderException();
@@ -35,22 +36,22 @@ public class TemplateEngine {
 	}
 	
 	public boolean validate(Map<String, String> vars){
-		
-		
-		
-		
+		return true;
 	}
 	
 	public Set<String> parsePlaceholderFromTemplate(){
+		
+		Set<String> resultSet = new HashSet<String>();
 		
 		Pattern pattern = Pattern.compile("\\${(.+?)}");
 		
 		Matcher matcher = pattern.matcher(template);
 		
 		while (matcher.find()) {
-			
+			resultSet.add(matcher.group(0));
 		}
 		
+		return resultSet;
 	}
 
 }

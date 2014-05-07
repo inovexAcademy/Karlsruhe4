@@ -30,7 +30,7 @@ public class TemplateEngineTest {
 	
 
 	@Test
-	public void renderTemplate() {
+	public void renderTemplate() throws PlaceHolderException, UnmatchedPlaceholderException {
 		assertThat(getTemplateEngine("Hallo").render(new HashMap<String, String>()), is("Hallo"));
 		
 		assertThat(getTemplateEngine("Hallo ${name}").render(Collections.singletonMap("name", "Klaus")), is("Hallo Klaus"));
@@ -49,7 +49,7 @@ public class TemplateEngineTest {
 	}
 	
 	@Test(expected = PlaceHolderException.class)
-	public void testPlaceHolderExceptionIsThrownWhenPlaceholderNotFound() {
+	public void testPlaceHolderExceptionIsThrownWhenPlaceholderNotFound() throws PlaceHolderException, UnmatchedPlaceholderException {
 		getTemplateEngine(defaultTemplate).render(defaultVars);
 	}
 	
