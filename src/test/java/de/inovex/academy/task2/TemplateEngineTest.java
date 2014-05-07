@@ -1,14 +1,16 @@
 package de.inovex.academy.task2;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
-import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import static java.util.Arrays.asList;
 
 public class TemplateEngineTest {
 	
@@ -51,6 +53,14 @@ public class TemplateEngineTest {
 	@Test(expected = PlaceHolderException.class)
 	public void testPlaceHolderExceptionIsThrownWhenPlaceholderNotFound() throws PlaceHolderException, UnmatchedPlaceholderException {
 		getTemplateEngine(defaultTemplate).render(defaultVars);
+	}
+	
+	@Test
+	public void testParsing(){
+		Set<String> expectedSet = new HashSet<String>();
+		expectedSet.add("vorname");
+		expectedSet.add("nachname");
+		assertThat(getTemplateEngine(defaultTemplate).parsePlaceholderFromTemplate(), equalTo(expectedSet));
 	}
 	
 }
