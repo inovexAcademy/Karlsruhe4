@@ -10,15 +10,12 @@ import static java.util.Arrays.asList;
 
 public class TemplateEngineTest {
 	
-	private TemplateEngine engine;
-
-	@Before
-	public void setup() {
-		this.engine = new TemplateEngine();
+	public TemplateEngine getTemplateEngine(String template) {
+		return new TemplateEngine(template);
 	}
 
 	@Test
 	public void renderTemplate() {
-		assertThat(engine.render(new HashMap<String, String>(), "Hallo"), is("Hallo"));
+		assertThat(getTemplateEngine("Hallo").render(new HashMap<String, String>()), is("Hallo"));
 	}
 }

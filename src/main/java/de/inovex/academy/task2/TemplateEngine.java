@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TemplateEngine {
+	private String template;
 
-	public TemplateEngine() {
-		// TODO Auto-generated constructor stub
+	public TemplateEngine(String template) {
+		this.template = template;
 	}
 	
-	public String render(Map<String, String> vars, String template) {
-		// TODO Auto-generated method stub
+	public String render(Map<String, String> vars) {
 		return "Hallo";
 	}
 
