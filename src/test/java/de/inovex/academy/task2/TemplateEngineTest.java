@@ -19,6 +19,6 @@ public class TemplateEngineTest {
 
 	@Test
 	public void renderTemplate() {
-		assertThat(engine.render(new HashMap<String, String>()), is("Hallo"));
+		assertThat(engine.render(new HashMap<String, String>(), "Hallo"), is("Hallo"));
 	}
 }
