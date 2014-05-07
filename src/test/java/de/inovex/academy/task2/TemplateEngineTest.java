@@ -1,5 +1,6 @@
 package de.inovex.academy.task2;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -17,5 +18,8 @@ public class TemplateEngineTest {
 	@Test
 	public void renderTemplate() {
 		assertThat(getTemplateEngine("Hallo").render(new HashMap<String, String>()), is("Hallo"));
+		
+		assertThat(getTemplateEngine("Hallo ${name}").render(Collections.singletonMap("name", "Klaus")), is("Hallo Klaus"));
+
 	}
 }
