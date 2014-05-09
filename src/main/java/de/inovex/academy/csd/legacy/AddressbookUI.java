@@ -33,7 +33,7 @@ import com.vaadin.ui.VerticalLayout;
  * app a web page showing your UI is automatically generated. Or you may choose to 
  * embed your UI to an existing web page. 
  */
-@Title("Addressbook")
+@Title("Addressbook Legacy")
 public class AddressbookUI extends UI {
 
 	/* User interface components are stored in session. */
