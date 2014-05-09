@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.List;
 
 import com.vaadin.annotations.Title;
 import com.vaadin.data.Container.Filter;
@@ -19,6 +21,8 @@ import com.vaadin.ui.AbstractTextField.TextChangeEventMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
@@ -43,6 +47,14 @@ public class AddressbookUI extends UI {
 	private Button removeContactButton = new Button("Remove this contact");
 	private FormLayout editorLayout = new FormLayout();
 	private FieldGroup editorFields = new FieldGroup();
+
+	public FieldGroup getEditorFields() {
+		return editorFields;
+	}
+
+	public void setEditorFields(FieldGroup editorFields) {
+		this.editorFields = editorFields;
+	}
 
 	private static final String FNAME = "First Name";
 	private static final String LNAME = "Last Name";
@@ -119,8 +131,10 @@ public class AddressbookUI extends UI {
 		editorLayout.addComponent(removeContactButton);
 
 		/* User interface can be created dynamically to reflect underlying data. */
+		FieldCreator fieldCreator = new FieldCreator();
 		for (String fieldName : fieldNames) {
-			TextField field = new TextField(fieldName);
+			Field<?> field = fieldCreator.getFieldByName(fieldName);
+			
 			editorLayout.addComponent(field);
 			field.setWidth("100%");
 
@@ -175,28 +189,7 @@ public class AddressbookUI extends UI {
 		});
 	}
 
-	/*
-	 * A custom filter for searching names and companies in the
-	 * contactContainer.
-	 */
-	private class ContactFilter implements Filter {
-		private String needle;
 
-		public ContactFilter(String needle) {
-			this.needle = needle.toLowerCase();
-		}
-
-		public boolean passesFilter(Object itemId, Item item) {
-			String haystack = ("" + item.getItemProperty(FNAME).getValue()
-					+ item.getItemProperty(LNAME).getValue() + item
-					.getItemProperty(COMPANY).getValue()).toLowerCase();
-			return haystack.contains(needle);
-		}
-
-		public boolean appliesToProperty(Object id) {
-			return true;
-		}
-	}
 
 	private void initAddRemoveButtons() {
 		addNewContactButton.addClickListener(new ClickListener() {
