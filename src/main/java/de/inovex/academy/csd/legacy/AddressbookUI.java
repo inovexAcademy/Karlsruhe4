@@ -59,7 +59,7 @@ public class AddressbookUI extends UI {
 	private static final String FNAME = "First Name";
 	private static final String LNAME = "Last Name";
 	private static final String COMPANY = "Company";
-	private static final String[] fieldNames = new String[] { FNAME, LNAME,
+	public static final String[] fieldNames = new String[] { FNAME, LNAME,
 			COMPANY, "Mobile Phone", "Work Phone", "Home Phone", "Work Email",
 			"Home Email", "Street", "City", "Zip", "State", "Country" };
 
